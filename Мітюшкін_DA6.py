@@ -26,6 +26,9 @@ df = load_data()
 
 if not df.empty:
     st.sidebar.title("Панель фільтрації")
+    st.sidebar.markdown("""
+    Використовуйте ці фільтри для налаштування відображення даних на головній панелі.
+    """)
 
     available_years = sorted(df["Year"].dropna().unique())
     selected_year = st.sidebar.selectbox("Оберіть рік:", available_years)
@@ -51,7 +54,9 @@ if not df.empty:
     st.title("Дашборд компаній")
     st.subheader(f"Відфільтровано {df_filtered.shape[0]} компаній")
 
-    st.markdown("### Таблиця результатів")    
+    st.markdown("### Таблиця результатів")
+    st.markdown("Оберіть колонки, які ви хочете бачити в таблиці:") 
+   
     all_columns = df_filtered.columns.tolist()
     default_columns = ["Company", "Region", "Industry", "Revenue", "Profit", "ROI"]
     
@@ -127,6 +132,7 @@ if not df.empty:
     st.markdown("---")
 
     st.markdown("### Модель лінійної регресії")
+    st.markdown("Дослідіть лінійну залежність між двома числовими показниками.")
     
     numeric_cols = df_filtered.select_dtypes(include=np.number).columns.tolist()
     
